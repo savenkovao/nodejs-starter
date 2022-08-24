@@ -1,6 +1,6 @@
 import { Consumer, ConsumerSubscribeTopics, EachBatchPayload, Kafka, EachMessagePayload} from 'kafkajs'
 
-export default class ExampleConsumer {
+export default class ConsumerFactory {
   private kafkaConsumer: Consumer
 
   public constructor() {
@@ -44,7 +44,7 @@ export default class ExampleConsumer {
           for (const message of batch.messages) {
             const prefix = `${batch.topic}[${batch.partition} | ${message.offset}] / ${message.timestamp}`
             console.log(`- ${prefix} ${message.key}#${message.value}`)
-            console.log("HELLLLLLLOOOOOOOOOO WOOOORDL")
+            console.log("HELLLLLOOOOOOOO WOOOORDL");
           }
         }
       })

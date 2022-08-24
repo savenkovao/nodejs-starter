@@ -1,17 +1,24 @@
-import { $log } from "@tsed/common";
-import { PlatformExpress } from "@tsed/platform-express";
-import { Server } from "./server";
+import { fastify } from "fastify";
+import pino from "pino";
 
-async function bootstrap(): Promise<void> {
+import userController from "./controllers/user-controller";
+
+const PORT = 5000;
+const server = fastify({
+  logger: pino({ level: "info" })
+});
+
+server.register(userController);
+
+const start = async () => {
   try {
-    $log.debug("Start server...");
-    const express = await PlatformExpress.bootstrap(Server, {});
+    await server.listen({port: PORT, host: '0.0.0.0'});
 
-    await express.listen();
-    $log.debug("Server initialized");
-  } catch (er) {
-    $log.error(er);
+    console.log(`Server running on port = ${PORT}`)
+  } catch(e) {
+    server.log.error(e);
+    process.exit(1);      
   }
-}
+};
 
-bootstrap();
+start();

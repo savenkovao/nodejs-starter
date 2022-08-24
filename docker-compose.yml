@@ -44,7 +44,7 @@ services:
     ports:
       - "4000:4000"
     volumes:
-      - ./packages/user:/glassbox-mc/packages/user
+      - ./packages/user:/glassbox-ms/packages/user
 
   worker:
     container_name: worker
@@ -57,7 +57,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./packages/worker:/glassbox-mc/packages/worker
+      - ./packages/worker:/glassbox-ms/packages/worker
 
   fastify-web:
     container_name: fastify-web
@@ -70,4 +70,4 @@ services:
     ports:
       - "6000:6000"
     volumes:
-      - ./packages/worker:/glassbox-mc/packages/fastify-web
+      - ./packages/worker:/glassbox-ms/packages/fastify-web

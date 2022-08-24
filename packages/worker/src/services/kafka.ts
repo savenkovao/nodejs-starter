@@ -13,7 +13,7 @@ export default class ProducerFactory {
       try {
         await this.producer.connect()
       } catch (error) {
-        console.log('Error connecting the producer: ', error)
+        console.log('Error connecting the producer:    s', error)
       }
     }
   

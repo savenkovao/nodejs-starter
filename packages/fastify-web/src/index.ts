@@ -6,9 +6,9 @@ const server = fastify()
 
 server.get('/ping', async (request, reply) => {
   return 'pong\n'
-})
+});
 
-server.listen({ port: Number(process.env['PORT']) || 6000 }, (err, address) => {
+server.listen({ port: 6000, host: '0.0.0.0'}, (err, address) => {
   if (err) {
     console.error(err)
     process.exit(1)

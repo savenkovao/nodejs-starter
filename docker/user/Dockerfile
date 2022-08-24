@@ -1,5 +1,5 @@
 FROM node:18
-ENV APP_PATH /glassbox-mc
+ENV APP_PATH /glassbox-ms
 WORKDIR $APP_PATH
 COPY ./package*.json ./
 COPY ./lerna.json ./

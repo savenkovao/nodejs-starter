@@ -1,21 +1,25 @@
-import { $log } from "@tsed/common";
-import { PlatformExpress } from "@tsed/platform-express";
-import { Server } from "./server";
-import ExampleConsumer from "./services/kafka-consumer";
+import {fastify} from "fastify";
+import pino from "pino";
+import ConsumerFactory from "./services/kafka-consumer";
 
-async function bootstrap(): Promise<void> {
+const PORT = 4000;
+
+const server = fastify({
+  logger: pino({level: "info"})
+});
+
+const consumer = new ConsumerFactory();
+
+const start = async () => {
   try {
-    $log.debug("Start server...");
-    const express = await PlatformExpress.bootstrap(Server, {});
-
-    const consumer = new ExampleConsumer();
+    await server.listen({port: PORT, host: '0.0.0.0'});
     await consumer.startBatchConsumer();
-    await express.listen();
     
-    $log.debug("Server initialized");
-  } catch (er) {
-    $log.error(er);
+    console.log(`Server running on port = ${PORT}`)
+  } catch(e) {
+    server.log.error(e);
+    process.exit(1);      
   }
-}
+};
 
-bootstrap();
+start();

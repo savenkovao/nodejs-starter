@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsc",
     "test": "node ./__tests__/fastify.test.js",
-    "prod": "node dist/index.js"
+    "prod": "tsc && node dist/index.js"
   },
   "dependencies": {
     "@types/node": "^18.7.13",
