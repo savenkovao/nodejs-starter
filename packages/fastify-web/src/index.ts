@@ -1,17 +1,24 @@
-'use strict';
+import {fastify} from 'fastify';
+import pino from 'pino';
 
-import fastify from 'fastify'
-
-const server = fastify()
-
-server.get('/ping', async (request, reply) => {
-  return 'pong\n'
+const PORT = Number(process.env.PORT) || 6000
+const server = fastify({
+  logger: pino({level: "info"})
 });
 
-server.listen({ port: 6000, host: '0.0.0.0'}, (err, address) => {
-  if (err) {
-    console.error(err)
-    process.exit(1)
+const start = async () => {
+  try {
+    await server.listen({port: PORT, host: '0.0.0.0'});
+
+    server.get('/ping', async (request, reply) => {
+      return 'pong\n'
+    });
+    
+    console.log(`Server running on port = ${PORT}`)
+  } catch(e) {
+    server.log.error(e);
+    process.exit(1);      
   }
-  console.log(`Server listening at ${address}`)
-})
+};
+
+start();

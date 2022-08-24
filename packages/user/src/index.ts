@@ -2,7 +2,7 @@ import {fastify} from "fastify";
 import pino from "pino";
 import ConsumerFactory from "./services/kafka-consumer";
 
-const PORT = 4000;
+const PORT = Number(process.env.PORT) || 4000;
 
 const server = fastify({
   logger: pino({level: "info"})

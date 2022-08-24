@@ -3,7 +3,7 @@ import pino from "pino";
 
 import userController from "./controllers/user-controller";
 
-const PORT = 5000;
+const PORT =  Number(process.env.PORT) || 5000;
 const server = fastify({
   logger: pino({ level: "info" })
 });
