@@ -1,0 +1,14 @@
+0 silly argv {
+0 silly argv   _: [ 'create' ],
+0 silly argv   lernaVersion: '5.4.3',
+0 silly argv   '$0': 'node_modules/.bin/lerna',
+0 silly argv   name: 'fastify'
+0 silly argv }
+1 notice cli v5.4.3
+2 verbose rootPath /Users/dashbouquet/Applications/glassbox-mc
+3 error Error: Command failed with exit code 1: git config --get user.name
+3 error     at makeError (/Users/dashbouquet/Applications/glassbox-mc/node_modules/execa/lib/error.js:60:11)
+3 error     at module.exports.sync (/Users/dashbouquet/Applications/glassbox-mc/node_modules/execa/index.js:194:17)
+3 error     at Object.execSync (/Users/dashbouquet/Applications/glassbox-mc/node_modules/@lerna/child-process/index.js:39:16)
+3 error     at CreateCommand.gitConfig (/Users/dashbouquet/Applications/glassbox-mc/node_modules/@lerna/create/index.js:181:25)
+3 error     at CreateCommand.initialize (/Users/dashbouquet/Applications/glassbox-mc/node_modules/@lerna/create/index.js:103:46)
