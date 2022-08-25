@@ -1,13 +1,11 @@
 import {fastify} from "fastify";
-import pino from "pino";
+import logger from "./configs/logger";
 import userController from "./controllers/user-controller";
 import db from "./db-connection";
 
 const PORT = Number(process.env.PORT) || 4000;
 
-const server = fastify({
-  logger: pino({level: "info"})
-});
+const server = fastify({logger});
 
 server.register(userController);
 

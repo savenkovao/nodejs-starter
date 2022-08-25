@@ -1,12 +1,10 @@
 import { fastify } from "fastify";
-import pino from "pino";
+import logger from "./configs/logger";
 import sequelize from "./db-connection";
 import startConsumer from "./kafka-consumer";
 
 const PORT =  Number(process.env.PORT) || 5000;
-const server = fastify({
-  logger: pino({ level: "info" })
-});
+const server = fastify({logger});
 
 const start = async () => {
   try {

@@ -1,4 +1,4 @@
-import { Kafka, ProducerBatch, RecordMetadata, TopicMessages } from "kafkajs";
+import { Kafka, ProducerBatch, TopicMessages } from "kafkajs";
 
 const kafka = new Kafka({
     brokers: ["kafka: 9092"],
@@ -20,13 +20,8 @@ const sendBatch = async (topicName: string, payload: any) => {
         topicMessages: [topicMessages]
     }
 
-    try {
-        await producer.connect();
-        await producer.sendBatch(batch);
-    }
-    catch(err) {
-        console.log(err);
-    }
+    await producer.connect();
+    await producer.sendBatch(batch);
 };
 
 export default {
