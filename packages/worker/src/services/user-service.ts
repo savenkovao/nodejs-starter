@@ -1,15 +1,19 @@
-import ProducerFactory from "./kafka";
+import { UserCreate } from "../interfaces/user.create";
+import { User } from "../models/user";
 
-const producer = new ProducerFactory();
-producer.start();
+const createUser = async (dto: UserCreate) => {
+    console.log("HERERRE")
+    try {
+        await User.create(dto);
+    } 
+    catch(err) {
+        console.log(err);
+    }
 
-const getUsers = async () => {
-    producer.sendBatch([{message: 'get_users'}]);
-    
-    return [{Id: 2, Name: "family"}];
 };
 
+
 export default {
-    getUsers
+    createUser
 }
   

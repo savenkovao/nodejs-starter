@@ -17,12 +17,12 @@ const UserController: FastifyPluginAsync = async (server: FastifyInstance, optio
 
     server.post<{Body: UserCreate}>('/users', {}, async (request, reply) => {
         try {
-            const user = await userService.createUser(request.body);
+            await userService.createUser(request.body);
 
-            return reply.code(200).send(user);
+            return reply.code(200).send("Kafka message sent");
         } catch(err) {
             request.log.error(err);
-            return reply.send(500)
+            return reply.send(500);
         }
     })
 }

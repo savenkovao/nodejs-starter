@@ -62,6 +62,11 @@ services:
     command: ["npm", "--prefix", "packages/worker", "run", "prod"]
     environment:
       - PORT=5000
+      - POSTGRES_DB=glassbox
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
     depends_on:
       - kafka
     ports:
