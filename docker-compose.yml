@@ -41,8 +41,14 @@ services:
     command: ["npm", "--prefix", "packages/user","run", "prod"]
     environment:
       - PORT=4000
+      - POSTGRES_DB=glassbox
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
     depends_on:
       - kafka
+      - postgres
     ports:
       - "4000:4000"
     volumes:
@@ -77,3 +83,23 @@ services:
       - "6000:6000"
     volumes:
       - ./packages/worker:/glassbox-ms/packages/fastify-web
+  
+  postgres:
+    container_name: postgres
+    image: postgres:12
+    environment:
+      POSTGRES_DB: glassbox
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
+
