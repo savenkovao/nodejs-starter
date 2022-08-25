@@ -1,10 +1,13 @@
+import passport from '@fastify/passport';
 import { FastifyInstance, FastifyPluginOptions, FastifyPluginAsync } from 'fastify';
 import fp from 'fastify-plugin';
 import { UserCreate } from '../interfaces/user.create';
 import userService from '../services/user-service';
 
 const UserController: FastifyPluginAsync = async (server: FastifyInstance, options: FastifyPluginOptions) => {
-    server.get('/users', {}, async (request, reply) => {
+    server.get('/users', {
+        preValidation: passport.authenticate('bearer')
+    }, async (request, reply) => {
         try {
             const users = await userService.getUsers();
             
@@ -15,7 +18,9 @@ const UserController: FastifyPluginAsync = async (server: FastifyInstance, optio
         }
     });
 
-    server.post<{Body: UserCreate}>('/users', {}, async (request, reply) => {
+    server.post<{Body: UserCreate}>('/users', {
+        preValidation: passport.authenticate('bearer')
+    }, async (request, reply) => {
         try {
             await userService.createUser(request.body);
 
