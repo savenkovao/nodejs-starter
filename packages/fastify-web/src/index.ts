@@ -14,7 +14,7 @@ const start = async () => {
       return 'pong\n'
     });
     
-    console.log(`Server running on port = ${PORT}`)
+    server.log.info(`Server running on port = ${PORT}`)
   } catch(e) {
     server.log.error(e);
     process.exit(1);      

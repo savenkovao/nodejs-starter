@@ -13,10 +13,8 @@ passport.registerUserDeserializer<number, any>(async (userId, request) => {
 
 
 passport.use(
-  'bearer',
+  "bearer",
   new Strategy((token: string, done: (error: any, user?: any, options?: any) => void) => {
-    console.log(token + "TOKEN");
-    console.log("Verified token = " + Number(jwtService.verify(token)));
     User.findOne({ where: { id: Number(jwtService.verify(token)) } })
       .then(user => {
         if (!user) {

@@ -2,7 +2,7 @@ import { Kafka, ProducerBatch, TopicMessages } from "kafkajs";
 
 const kafka = new Kafka({
     brokers: ["kafka: 9092"],
-    clientId: 'user-service'
+    clientId: "user-service"
 });
 
 const producer = kafka.producer();

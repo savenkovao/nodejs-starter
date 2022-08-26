@@ -14,9 +14,11 @@
   "dependencies": {
     "@fastify/passport": "^2.2.0",
     "@fastify/secure-session": "^5.2.0",
+    "@fastify/swagger": "^7.4.1",
     "body-parser": "^1.20.0",
     "fastify": "4.5.x",
     "fastify-plugin": "^4.2.0",
+    "fastify-swagger": "^5.2.0",
     "jsonwebtoken": "^8.5.1",
     "kafkajs": "^2.2.0",
     "passport": "^0.6.0",
