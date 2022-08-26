@@ -1,6 +1,6 @@
 import passport from "@fastify/passport";
 import { Strategy } from "passport-http-bearer"
-import { User } from "../models/user";
+import { User } from "base/dist/models/user";
 import jwtService from "../services/jwt-service";
 
 

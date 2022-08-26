@@ -1,10 +1,11 @@
-import { UserCreate } from "../interfaces/user.create";
+
+import { Models, UserCreate } from "base";
 import producer from "../kafka-producer";
-import { User } from "../models/user";
+
 import jwtService from "./jwt-service";
 
 const getUsers = async () => {
-    return await (await User.findAll()).map(it => ({id: it.id, username: it.username}));
+    return await (await Models.User.findAll()).map(it => ({id: it.id, username: it.username}));
 };
 
 const createUser = async (model: UserCreate): Promise<void> => {
@@ -12,7 +13,7 @@ const createUser = async (model: UserCreate): Promise<void> => {
 };
 
 const getUserByCred = async (model: UserCreate) => {
-    const user = await User.findOne({
+    const user = await Models.User.findOne({
         where: {username: model.username, password: model.password}
     });
 

@@ -1,5 +1,5 @@
+import { UserCreate } from "base";
 import { ConsumerSubscribeTopics, EachBatchPayload, Kafka } from "kafkajs";
-import { UserCreate } from "./interfaces/user.create";
 import userService from "./services/user-service";
 
 const kafka = new Kafka({

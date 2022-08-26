@@ -1,7 +1,8 @@
 import passport from "@fastify/passport";
+import { UserCreate } from "base";
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
-import { UserCreate } from "../interfaces/user.create";
+
 import userService from "../services/user-service";
 
 const UserController: FastifyPluginAsync = async (server: FastifyInstance) => {

@@ -1,11 +1,11 @@
-# `fastify`
+# `base`
 
 > TODO: description
 
 ## Usage
 
 ```
-const fastify = require('fastify');
+const base = require('base');
 
 // TODO: DEMONSTRATE API
 ```

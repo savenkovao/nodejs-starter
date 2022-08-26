@@ -3,7 +3,7 @@ import fastifySecureSession from '@fastify/secure-session';
 import {fastify} from "fastify";
 import fs from "fs";
 import path from "path";
-import logger from "./configs/logger";
+import {Logger} from "base";
 import authController from "./controllers/auth-controller";
 import userController from "./controllers/user-controller";
 import swagger from "./swagger";
@@ -12,7 +12,7 @@ import "./authentication/strategy";
 
 const PORT = Number(process.env.PORT) || 4000;
 
-const server = fastify({logger});
+const server = fastify({logger: Logger});
 
 server.register(fastifySecureSession, { key: fs.readFileSync(path.join(__dirname, "../secret-key"))})
 
@@ -31,7 +31,7 @@ const start = async () => {
     server.log.info("Seccuesfull db connection");
 
     await server.ready()
-    server.swagger()
+    server.swagger();
 
     await server.listen({port: PORT, host: "0.0.0.0"});
     

@@ -53,6 +53,7 @@ services:
       - "4000:4000"
     volumes:
       - ./packages/user:/glassbox-ms/packages/user
+      - ./packages/base:/glassbox-ms/packages/base
 
   worker:
     container_name: worker
@@ -74,21 +75,7 @@ services:
       - "5000:5000"
     volumes:
       - ./packages/worker:/glassbox-ms/packages/worker
-
-  fastify-web:
-    container_name: fastify-web
-    build:
-      context: .
-      dockerfile: ./docker/fastify-web/Dockerfile
-    command: ["npm", "--prefix", "packages/fastify-web", "run", "prod"]
-    environment:
-      - PORT=6000
-    depends_on:
-      - kafka
-    ports:
-      - "6000:6000"
-    volumes:
-      - ./packages/worker:/glassbox-ms/packages/fastify-web
+      - ./packages/base:/glassbox-ms/packages/base
   
   postgres:
     container_name: postgres

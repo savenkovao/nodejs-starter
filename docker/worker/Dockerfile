@@ -5,7 +5,9 @@ COPY ./package*.json ./
 COPY ./lerna.json ./
 RUN npm install
 COPY ./packages/worker ./packages/worker
+COPY ./packages/base ./packages/base
 RUN npx lerna bootstrap
+RUN npm run build:base
 RUN npm run build
 EXPOSE 8000
 CMD [ "npm", "--prefix", "packages/worker", "run", "prod" ]

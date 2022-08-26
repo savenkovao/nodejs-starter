@@ -1,10 +1,10 @@
 import { fastify } from "fastify";
-import logger from "./configs/logger";
+import {Logger} from "base";
 import sequelize from "./db-connection";
 import startConsumer from "./kafka-consumer";
 
 const PORT =  Number(process.env.PORT) || 5000;
-const server = fastify({logger});
+const server = fastify({logger: Logger});
 
 const start = async () => {
   try {
@@ -13,7 +13,7 @@ const start = async () => {
 
     await sequelize.sync();
 
-    await server.listen({port: PORT, host: '0.0.0.0'});
+    await server.listen({port: PORT, host: "0.0.0.0"});
     await startConsumer(["user_service"]);
 
     server.log.info(`Server running on port = ${PORT}`);

@@ -1,8 +1,7 @@
-import { UserCreate } from "../interfaces/user.create";
-import { User } from "../models/user";
+import {Models, UserCreate} from "base";
 
 const createUser = async (dto: UserCreate) => {
-    await User.create(dto);
+    await Models.User.create(dto);
 };
 
 

@@ -5,6 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "build:base": "tsc -b packages/base",
+    "build:user": "tsc -b packages/user",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "lerna run build"
   },

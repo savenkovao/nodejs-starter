@@ -1,6 +1,7 @@
+import { UserCreate } from "base";
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
-import { UserCreate } from "../interfaces/user.create";
+
 import userService from "../services/user-service";
 
 const AuthController: FastifyPluginAsync = async (server: FastifyInstance) => {
