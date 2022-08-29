@@ -1,4 +1,13 @@
-import { afterAll, beforeAll, describe, expect, it, vitest, vi, beforeEach, afterEach } from "vitest";
+import { 
+    afterAll,
+    beforeAll,
+    describe, 
+    expect, 
+    it, 
+    vi, 
+    beforeEach, 
+    afterEach 
+} from "vitest";
 import server from "../src/app";
 import jwtService from "../src/services/jwt-service";
 import userService from "../src/services/user-service";
@@ -14,7 +23,7 @@ afterAll(async () => {
 });
 
 describe("Test server health", () => {
-    it("serve GET /", async () => {
+    it("server GET /", async () => {
       const res = await server.inject("/");
       expect(res.statusCode).toEqual(200);
       expect(res.json()).toEqual({ message: "Server is alive" })
@@ -47,7 +56,7 @@ describe("Test authorize", () => {
         expect(res.statusCode).toEqual(500);
     });
 
-    it("reutrns token /login", async () => {
+    it("returns token /login", async () => {
         const spy = vi.spyOn(userService, "getUserByCred").mockImplementation(async () => ({
             token: "token",
             message: "message"
@@ -63,10 +72,10 @@ describe("Test authorize", () => {
         expect(JSON.parse(res.body)).toHaveProperty("token");
     });
 
-    it("return failed aith /login", async () => {
-        const spy = vi.spyOn(userService, "getUserByCred").mockImplementation(async () => ({
-            message: "failed message"
-        }));
+    it("return failed auth /login", async () => {
+        const spy = vi.spyOn(userService, "getUserByCred").mockImplementation(async () => {
+            throw new Error("Invalid password");
+        });
 
         const res = await server
                 .inject()
@@ -78,12 +87,12 @@ describe("Test authorize", () => {
         
         const body = JSON.parse(res.body);
         expect(body).toHaveProperty("message");
-        expect(body["message"]).toEqual("Authentication failed");
+        expect(body["message"]).toEqual("Invalid password");
     });
 });
 
 
-describe("Test user controller", () => {
+describe("User controller", () => {
     const createObj = {
         username: "username",
         password: "password"
@@ -176,9 +185,7 @@ describe("Test user controller", () => {
     });
 
     it("get users GET /users", async () => {
-        const spy = vi.spyOn(userService, "getUsers").mockImplementation(async () => {
-            return [{username: "user", id: 1}]
-        });
+        const spy = vi.spyOn(userService, "getUsers").mockImplementation(async () => []);
 
         const res = await server
                 .inject()
@@ -188,7 +195,7 @@ describe("Test user controller", () => {
         expect(spy.getMockName()).toEqual("getUsers");
         expect(spy).toHaveBeenCalledOnce();
         
-        expect(JSON.parse(res.body)).toEqual([{username: "user", id: 1}]);
+        expect(JSON.parse(res.body)).toEqual([]);
         expect(res.statusCode).toEqual(200);
     });
 
