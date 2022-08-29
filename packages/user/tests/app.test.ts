@@ -101,7 +101,7 @@ describe("Test user controller", () => {
         vi.restoreAllMocks()
     });
 
-    it("returns unauthorized with empty token", async () => {
+    it("returns unauthorized with empty token POST /users", async () => {
         const res = await server
                 .inject()
                 .post("/users")
@@ -110,7 +110,7 @@ describe("Test user controller", () => {
         expect(res.statusCode).toEqual(401);
     });
 
-    it("return unauthorized with wrong token", async () => {
+    it("return unauthorized with wrong token POST /users", async () => {
         const res = await server
                 .inject()
                 .headers({

@@ -1,13 +1,13 @@
 import server from "./app";
 import db from "./db-connection";
 
-const PORT = Number(process.env.PORT) || 4000;
+const PORT = Number(process.env.USER_PORT) || 4000;
 
 const start = async () => {
   try {
     await db.authenticate();
     await db.sync();
-    server.log.info("Seccuesfull db connection");
+    server.log.info("Successful db connection");
 
     await server.ready()
     server.swagger();

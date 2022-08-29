@@ -38,35 +38,40 @@ services:
     build:
       context: .
       dockerfile: ./docker/user/Dockerfile
-    command: ["npm", "--prefix", "packages/user","run", "prod"]
+    command: ["npm", "--prefix", "packages/user","run", "dev"]
     env_file:
       - .env
-      - .production.env
+      - .development.env
     depends_on:
       - kafka
       - postgres
     ports:
-      - "4000:4000"
+      - "4001:4001"
     volumes:
       - ./packages/user:/glassbox-ms/packages/user
       - ./packages/base:/glassbox-ms/packages/base
+      - usernodemodules:/packages/user/node_modules
+      - basenodemodules:/packages/base/node_modules
 
   worker:
     container_name: worker
     build:
       context: .
       dockerfile: ./docker/worker/Dockerfile
-    command: ["npm", "--prefix", "packages/worker", "run", "prod"]
+    command: ["npm", "--prefix", "packages/worker", "run", "dev"]
     env_file:
       - .env
-      - .production.env
+      - .development.env
     depends_on:
       - kafka
+      - postgres
     ports:
-      - "5000:5000"
+      - "5001:5001"
     volumes:
       - ./packages/worker:/glassbox-ms/packages/worker
       - ./packages/base:/glassbox-ms/packages/base
+      - workernodemodules:/packages/worker/node_modules
+      - basenodemodules:/packages/base/node_modules
   
   postgres:
     container_name: postgres
@@ -86,4 +91,7 @@ services:
 
 volumes:
   pgdata:
+  usernodemodules:
+  basenodemodules:
+  workernodemodules:
 

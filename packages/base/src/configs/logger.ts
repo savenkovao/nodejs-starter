@@ -1,4 +1,5 @@
 import pino from "pino";
+import moment from "moment";
 
 let n = 0;
 
@@ -15,5 +16,5 @@ export default pino({
           return {level: pino.levels.labels[number].toUpperCase()}
         },
       },
-      timestamp: () => `,"time":"${new Date(Date.now()).toISOString()}"`
+      timestamp: () => moment().format('MMMM Do YYYY, h:mm:ss a')
 })

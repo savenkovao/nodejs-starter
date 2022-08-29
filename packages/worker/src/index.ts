@@ -3,7 +3,7 @@ import {Logger} from "base";
 import sequelize from "./db-connection";
 import startConsumer from "./kafka-consumer";
 
-const PORT =  Number(process.env.PORT) || 5000;
+const PORT =  Number(process.env.WORKER_PORT) || 5000;
 const server = fastify({logger: Logger});
 
 const start = async () => {
@@ -24,3 +24,4 @@ const start = async () => {
 };
 
 start();
+
