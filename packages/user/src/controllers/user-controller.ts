@@ -5,9 +5,11 @@ import fp from "fastify-plugin";
 
 import userService from "../services/user-service";
 
+const isTest = process.env.NODE_ENV === "test"
+
 const UserController: FastifyPluginAsync = async (server: FastifyInstance) => {
     server.get('/users', {
-        preValidation: passport.authenticate('bearer'),
+        preValidation: passport.authenticate(isTest ? "bearer-mock" : "bearer"),
         schema: {
             description: "This is an endpoint for fetching all users",
             tags: ["users"],
@@ -28,16 +30,15 @@ const UserController: FastifyPluginAsync = async (server: FastifyInstance) => {
     }, async (request, reply) => {
         try {
             const users = await userService.getUsers();
-            
             return reply.code(200).send(users);
-        } catch(err) {
+        } catch(err: any) {
             request.log.error(err);
-			return reply.send(500);
+			return reply.code(500).send({message: err?.message});
         }
     });
 
     server.post<{Body: UserCreate}>('/users', {
-        preValidation: passport.authenticate("bearer"),
+        preValidation: passport.authenticate(isTest ? "bearer-mock" : "bearer"),
         schema: {
             description: "This is an endpoint for user creation",
             tags: ["users"],

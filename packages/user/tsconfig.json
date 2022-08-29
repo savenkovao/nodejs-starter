@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 {
   "compilerOptions": {
     "target": "es6",
@@ -9,6 +10,7 @@
     "skipLibCheck": true,                           
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false     
-  }
+    "strictPropertyInitialization": false,
+  },
+  "exclude": ["./vitest.config.ts", "./tests", "/node_modules"]
 }
