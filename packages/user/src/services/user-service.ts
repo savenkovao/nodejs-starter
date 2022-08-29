@@ -1,11 +1,12 @@
 
 import { Models, UserCreate } from "base";
-import producer from "../kafka-producer";
+import producer from "./kafka-producer";
 
 import jwtService from "./jwt-service";
+import bcrypt from "bcryptjs";
 
 const getUsers = async () => {
-    return await (await Models.User.findAll()).map(it => ({id: it.id, username: it.username}));
+    return await Models.User.findAll();
 };
 
 const createUser = async (model: UserCreate): Promise<void> => {
@@ -14,19 +15,21 @@ const createUser = async (model: UserCreate): Promise<void> => {
 
 const getUserByCred = async (model: UserCreate) => {
     const user = await Models.User.findOne({
-        where: {username: model.username, password: model.password}
+        where: {username: model.username}
     });
 
-    if (user) {
-        return {
-            token: jwtService.genToken(user.id),
-            message: "Login succesfull"
-        };
+    if (!user) {
+        throw new Error("Can not find user");
+    }
+
+    if (!bcrypt.compareSync(model.password, user.password)) {
+        throw new Error("Invalid password");
     }
 
     return {
-        message: "User not found"
-    }
+        message: "Login successfully",
+        token: jwtService.genToken(user.id),
+    };
 }
 
 export default {

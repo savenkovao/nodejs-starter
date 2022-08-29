@@ -18,8 +18,8 @@ describe("Test server health", () => {
       const res = await server.inject("/");
       expect(res.statusCode).toEqual(200);
       expect(res.json()).toEqual({ message: "Server is alive" })
-    })
-})
+    });
+});
 
 describe("Test authorize", () => {
     const loginObj = {
