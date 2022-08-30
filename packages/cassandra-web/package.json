@@ -1,0 +1,45 @@
+{
+  "name": "cassandra",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "Vlad Tsygankov <tsygan-97@mail.ru>",
+  "homepage": "https://github.com/VladislavTsygankov/glassbox-ms#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladislavTsygankov/glassbox-ms.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/cassandra.test.js",
+    "dev": "nodemon -e ts -w 'src/**/*.ts' -w '../base/src/**/*' -x npm run dev:serve",
+    "dev:serve": "tsc -b ../base && ts-node src/index.ts",
+    "prod": "tsc && node dist/index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/VladislavTsygankov/glassbox-ms/issues"
+  },
+  "dependencies": {
+    "@fastify/type-provider-typebox": "^2.3.0",
+    "@sinclair/typebox": "^0.24.31",
+    "base": "^1.0.0",
+    "cassandra-driver": "^4.6.4",
+    "fastify": "^4.5.3",
+    "fastify-plugin": "^4.2.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.14",
+    "@types/uuid": "^8.3.4",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.2"
+  }
+}

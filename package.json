@@ -8,6 +8,7 @@
     "build:base": "tsc -b packages/base",
     "build:user": "tsc -b packages/user",
     "build:worker": "tsc -b packages/worker",
+    "build:cassandra-web": "tsc -b packages/cassandra-web",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:user": "vitest",
     "build": "lerna run build"

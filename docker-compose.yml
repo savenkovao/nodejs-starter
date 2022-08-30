@@ -50,6 +50,9 @@ services:
     volumes:
       - ./packages/user:/glassbox-ms/packages/user
       - ./packages/base:/glassbox-ms/packages/base
+      - usernodemodules:/packages/cassandra-web/node_modules
+      - basenodemodules:/packages/base/node_modules
+
 
   worker:
     container_name: worker
@@ -67,6 +70,38 @@ services:
     volumes:
       - ./packages/worker:/glassbox-ms/packages/worker
       - ./packages/base:/glassbox-ms/packages/base
+      - workernodemodules:/packages/cassandra-web/node_modules
+      - basenodemodules:/packages/base/node_modules
+
+
+  cassandra-web:
+    container_name: cassandra-web
+    build:
+      context: .
+      dockerfile: ./docker/cassandra-web/Dockerfile
+    command: ["npm", "--prefix", "packages/cassandra-web", "run", "prod"]
+    env_file:
+      - .development.env
+    depends_on:
+      - cassandra
+    ports:
+      - "2000:2000"
+    volumes:
+      - ./packages/cassandra-web:/glassbox-ms/packages/cassandra-web
+      - ./packages/base:/glassbox-ms/packages/base
+      - cassandrawebnodemodules:/packages/cassandra-web/node_modules
+      - basenodemodules:/packages/base/node_modules
+
+  cassandra:
+    container_name: cassandra
+    image: cassandra:4.0
+    ports:
+      - 9042:9042
+    volumes:
+      - cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=citizix
+    restart: always
   
   postgres:
     container_name: postgres
@@ -86,4 +121,9 @@ services:
 
 volumes:
   pgdata:
+  cassandra:
+  usernodemodules:
+  basenodemodules:
+  workernodemodules:
+  cassandrawebnodemodules:
 

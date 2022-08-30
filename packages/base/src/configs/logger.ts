@@ -7,7 +7,6 @@ export default pino({
     mixin() {
         return {
           line: ++n,
-          appName: "user-sevice",
           logger: "PINO"
         }
       },
