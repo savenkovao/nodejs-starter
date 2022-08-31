@@ -7,6 +7,7 @@ const start = async () => {
   try {
     await db.authenticate();
     await db.sync();
+
     server.log.info("Successful db connection");
 
     await server.ready()

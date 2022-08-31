@@ -10,10 +10,10 @@ export default pino({
           logger: "PINO"
         }
       },
-      formatters: {
-        level(_, number) {
-          return {level: pino.levels.labels[number].toUpperCase()}
-        },
+    formatters: {
+      level(_, number) {
+        return {level: pino.levels.labels[number].toUpperCase()}
       },
-      timestamp: () => moment().format('MMMM Do YYYY, h:mm:ss a')
-})
+    },
+    timestamp: () => moment().format('MMMM Do YYYY, h:mm:ss a')
+});

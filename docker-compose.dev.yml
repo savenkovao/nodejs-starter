@@ -1,5 +1,21 @@
 version: '3.5'
 services:
+  cassandra:
+    container_name: cassandra
+    image: cassandra:4.0
+    ports:
+      - 7000:7000
+      - 7001:7001
+      - 7199:7199
+      - 9042:9042
+      - 9160:9160
+    volumes:
+      - cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=citizix
+      - CASSANDRA_LISTEN_ADDRESS=127.0.0.1
+    restart: always
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -91,17 +107,6 @@ services:
       - cassandrawebnodemodules:/packages/cassandra-web/node_modules
       - basenodemodules:/packages/base/node_modules
 
-  cassandra:
-    container_name: cassandra
-    image: cassandra:4.0  
-    ports:
-      - 9042:9042
-    volumes:
-      - cassandra:/var/lib/cassandra
-    environment:
-      CASSANDRA_CLUSTER_NAME: citizix
-    restart: always
-  
   postgres:
     container_name: postgres
     image: postgres:12
