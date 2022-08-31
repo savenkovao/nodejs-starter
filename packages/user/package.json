@@ -18,6 +18,8 @@
     "@fastify/passport": "^2.2.0",
     "@fastify/secure-session": "^5.2.0",
     "@fastify/swagger": "^7.4.1",
+    "@fastify/type-provider-typebox": "^2.3.0",
+    "@sinclair/typebox": "^0.24.31",
     "base": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",

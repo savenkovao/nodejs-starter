@@ -1,8 +1,8 @@
 import passport from "@fastify/passport";
-import { UserCreate } from "base";
+import { Type } from "@sinclair/typebox";
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
-
+import { UserSchema, UserType } from "../schemas/user.schema";
 import userService from "../services/user-service";
 
 const isTest = process.env.NODE_ENV === "test"
@@ -16,14 +16,7 @@ const UserController: FastifyPluginAsync = async (server: FastifyInstance) => {
             response: {
                 200: {
                     description: "Success Response",
-                    type: "array",
-                    items: {
-                        type: "object",
-                        properties: {
-                            id: { type: "number"},
-                            username: {type: "string"}
-                        }
-                    }
+                    ...Type.Array(UserSchema)
                 }
             }
         }
@@ -37,21 +30,15 @@ const UserController: FastifyPluginAsync = async (server: FastifyInstance) => {
         }
     });
 
-    server.post<{Body: UserCreate}>('/users', {
+    server.post<{Body: UserType}>('/users', {
         preValidation: passport.authenticate(isTest ? "bearer-mock" : "bearer"),
         schema: {
             description: "This is an endpoint for user creation",
             tags: ["users"],
-            body: {
-                type: "object",
-                properties: {
-                  username: { type: "string"},
-                  password: { type: "string"}
-                }
-              },
+            body: UserSchema,
             response: {
                 200: {
-                    description: "Succesful response",
+                    description: "Successful response",
                     type: "string"
                 },
                 500: {

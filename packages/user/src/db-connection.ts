@@ -10,7 +10,7 @@ const sequelize = new Sequelize(
         models: [Models.User],
         dialect: "postgres",
         port: Number(process.env.POSTGRES_PORT),
-        host: process.env.POSTGRES_HOST,
+        host: process.env.POSTGRES_HOST
     }
 );
 
