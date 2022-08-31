@@ -5,7 +5,7 @@ const kafka = new Kafka({
     clientId: "user-service"
 });
 
-const producer = kafka.producer();
+export const producer = kafka.producer();
 
 const sendBatch = async (topicName: string, payload: any) => {
     const topicMessages: TopicMessages = {
@@ -20,7 +20,6 @@ const sendBatch = async (topicName: string, payload: any) => {
         topicMessages: [topicMessages]
     }
 
-    await producer.connect();
     await producer.sendBatch(batch);
 };
 

@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 import mapper from "../db/mapper";
-import { PostCreateType } from "../interfaces/post";
+import { PostCreateType } from "../schemas";
 
 const postMapper = mapper.forModel('Post');
 

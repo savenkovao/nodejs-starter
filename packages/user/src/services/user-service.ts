@@ -1,19 +1,19 @@
 
-import { Models, UserCreate } from "base";
+import { Models } from "base";
 import producer from "./kafka-producer";
-
 import jwtService from "./jwt-service";
 import bcrypt from "bcryptjs";
+import { UserType } from "../schemas";
 
 const getUsers = async () => {
     return await Models.User.findAll();
 };
 
-const createUser = async (model: UserCreate): Promise<void> => {
+const createUser = async (model: UserType): Promise<void> => {
     await producer.sendBatch("user_service", model);
 };
 
-const getUserByCred = async (model: UserCreate) => {
+const getUserByCred = async (model: UserType) => {
     const user = await Models.User.findOne({
         where: {username: model.username}
     });

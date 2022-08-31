@@ -2,14 +2,20 @@ import passport from "@fastify/passport";
 import { Type } from "@sinclair/typebox";
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
-import { UserSchema, UserType } from "../schemas/user.schema";
 import userService from "../services/user-service";
+import { 
+    UserSchema,
+    UserType, 
+    UserGetResponse, 
+    UserPostResponse, 
+    UserPostResponseSchema 
+} from "../schemas";
 
-const isTest = process.env.NODE_ENV === "test"
+const authStrategy = process.env.NODE_ENV === "test" ? "bearer-mock" : "bearer";
 
 const UserController: FastifyPluginAsync = async (server: FastifyInstance) => {
-    server.get('/users', {
-        preValidation: passport.authenticate(isTest ? "bearer-mock" : "bearer"),
+    server.get<{Reply: UserGetResponse}>('/users', {
+        preValidation: passport.authenticate(authStrategy),
         schema: {
             description: "This is an endpoint for fetching all users",
             tags: ["users"],
@@ -30,8 +36,8 @@ const UserController: FastifyPluginAsync = async (server: FastifyInstance) => {
         }
     });
 
-    server.post<{Body: UserType}>('/users', {
-        preValidation: passport.authenticate(isTest ? "bearer-mock" : "bearer"),
+    server.post<{Body: UserType, Reply: UserPostResponse}>('/users', {
+        preValidation: passport.authenticate(authStrategy),
         schema: {
             description: "This is an endpoint for user creation",
             tags: ["users"],
@@ -39,14 +45,11 @@ const UserController: FastifyPluginAsync = async (server: FastifyInstance) => {
             response: {
                 200: {
                     description: "Successful response",
-                    type: "string"
+                    ...UserPostResponseSchema
                 },
                 500: {
                     description: "Server error",
-                    type: "object",
-                    properties: {
-                        msg: {type: "string"}
-                    }
+                    ...UserPostResponseSchema
                 }
             }
         }
@@ -54,10 +57,10 @@ const UserController: FastifyPluginAsync = async (server: FastifyInstance) => {
         try {
             await userService.createUser(request.body);
 
-            return reply.code(200).send("Kafka message sent");
+            return reply.code(200).send({message: "Kafka message sent"});
         } catch(err) {
             request.log.error(err);
-            return reply.code(500).send({msg: "Server error"});
+            return reply.code(500).send({message: "Server error"});
         }
     })
 }

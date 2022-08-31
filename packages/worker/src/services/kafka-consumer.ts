@@ -1,6 +1,6 @@
 import { UserCreate } from "base";
 import { ConsumerSubscribeTopics, EachBatchPayload, Kafka } from "kafkajs";
-import userService from "./services/user-service";
+import userService from "./user-service";
 
 const kafka = new Kafka({
     brokers: ["kafka:9092"],

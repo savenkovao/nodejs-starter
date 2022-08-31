@@ -15,5 +15,5 @@ export default pino({
         return {level: pino.levels.labels[number].toUpperCase()}
       },
     },
-    timestamp: () => moment().format('MMMM Do YYYY, h:mm:ss a')
+    timestamp: () => `,timestamp: "${moment().format('MMMM Do YYYY, h:mm:ss a')}"`
 });

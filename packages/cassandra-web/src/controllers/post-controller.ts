@@ -1,10 +1,15 @@
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
-import { PostCreateType, PostGetParams } from "../interfaces/post";
 import postService from "../services/post-service";
+import { 
+    PostCreateResponse, 
+    PostCreateType, 
+    PostGetParams, 
+    PostGetReponse 
+} from "../schemas";
 
 const PostController: FastifyPluginAsync = async (server: FastifyInstance) => {
-    server.get('/posts', {}, async (request, reply) => {
+    server.get<{Reply: PostGetReponse}>('/posts', {}, async (request, reply) => {
         try {
             const posts = await postService.getAllPosts()
 
@@ -15,7 +20,7 @@ const PostController: FastifyPluginAsync = async (server: FastifyInstance) => {
         }
     });
 
-    server.get<{Params: PostGetParams}>('/posts/:id', {}, async (request, reply) => {
+    server.get<{Params: PostGetParams, Reply: PostGetReponse}>('/posts/:id', {}, async (request, reply) => {
         try {
             const {id} = request.params;
 
@@ -28,7 +33,7 @@ const PostController: FastifyPluginAsync = async (server: FastifyInstance) => {
         }
     });
 
-    server.post<{Body: PostCreateType}>('/posts', {}, async (request, reply) => {
+    server.post<{Body: PostCreateType, Reply: PostCreateResponse}>('/posts', {}, async (request, reply) => {
         try {
             const {body} = request;
             await postService.createPost(body);

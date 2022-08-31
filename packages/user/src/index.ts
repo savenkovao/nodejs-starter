@@ -1,10 +1,15 @@
 import server from "./app";
 import db from "./db-connection";
+import { producer } from "./services/kafka-producer";
 
 const PORT = Number(process.env.USER_PORT) || 4000;
 
 const start = async () => {
   try {
+    await producer.connect();
+
+    server.log.info("Kafka producer connected");
+
     await db.authenticate();
     await db.sync();
 

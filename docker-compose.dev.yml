@@ -1,133 +1,29 @@
 version: '3.5'
 services:
-  cassandra:
-    container_name: cassandra
-    image: cassandra:4.0
-    ports:
-      - 7000:7000
-      - 7001:7001
-      - 7199:7199
-      - 9042:9042
-      - 9160:9160
-    volumes:
-      - cassandra:/var/lib/cassandra
-    environment:
-      - CASSANDRA_CLUSTER_NAME=citizix
-      - CASSANDRA_LISTEN_ADDRESS=127.0.0.1
-    restart: always
-
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - 22181:2181
-
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    depends_on:
-      - zookeeper
-    ports:
-      - 29092:29092
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
-  kafka_ui:
-    image: provectuslabs/kafka-ui:latest
-    depends_on:
-      - kafka
-    ports:
-      - 8080:8080
-    environment:
-      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
-
-  user:
-    container_name: user
-    build:
-      context: .
-      dockerfile: ./docker/user/Dockerfile
-    command: ["npm", "--prefix", "packages/user","run", "dev"]
-    env_file:
-      - .env
-      - .development.env
-    depends_on:
-      - kafka
-      - postgres
-    ports:
-      - "4001:4001"
-    volumes:
-      - ./packages/user:/glassbox-ms/packages/user
-      - ./packages/base:/glassbox-ms/packages/base
-      - usernodemodules:/packages/user/node_modules
-      - basenodemodules:/packages/base/node_modules
-
   worker:
-    container_name: worker
     build:
       context: .
       dockerfile: ./docker/worker/Dockerfile
     command: ["npm", "--prefix", "packages/worker", "run", "dev"]
     env_file:
-      - .env
       - .development.env
-    depends_on:
-      - kafka
-      - postgres
     ports:
-      - "5001:5001"
-    volumes:
-      - ./packages/worker:/glassbox-ms/packages/worker
-      - ./packages/base:/glassbox-ms/packages/base
-      - workernodemodules:/packages/worker/node_modules
-      - basenodemodules:/packages/base/node_modules
-
-  cassandra-web:
-    container_name: cassandra-web
+      - 5001:5001
+  user:
     build:
       context: .
-      dockerfile: ./docker/cassandra-web/Dockerfile
+      dockerfile: ./docker/worker/Dockerfile
+    command: ["npm", "--prefix", "packages/user", "run", "dev"]
+    env_file:
+      - .development.env
+    ports:
+      - 4001:4001
+  cassandra-web:
+    build:
+      context: .
+      dockerfile: ./docker/worker/Dockerfile
     command: ["npm", "--prefix", "packages/cassandra-web", "run", "dev"]
     env_file:
       - .development.env
-    depends_on:
-      - cassandra
     ports:
-      - "2001:2001"
-    volumes:
-      - ./packages/cassandra-web:/glassbox-ms/packages/cassandra-web
-      - ./packages/base:/glassbox-ms/packages/base
-      - cassandrawebnodemodules:/packages/cassandra-web/node_modules
-      - basenodemodules:/packages/base/node_modules
-
-  postgres:
-    container_name: postgres
-    image: postgres:12
-    environment:
-      POSTGRES_DB: glassbox
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      PG_DATA: /var/lib/postgresql/data
-    ports:
-      - 5432
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    restart: always
-
-volumes:
-  pgdata:
-  cassandra:
-  usernodemodules:
-  basenodemodules:
-  workernodemodules:
-  cassandrawebnodemodules:
-
+      - 2001:2001

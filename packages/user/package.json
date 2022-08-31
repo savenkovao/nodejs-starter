@@ -22,7 +22,6 @@
     "@sinclair/typebox": "^0.24.31",
     "base": "^1.0.0",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.0",
     "fastify": "4.5.x",
     "fastify-plugin": "^4.2.0",
     "fastify-swagger": "^5.2.0",

@@ -1,0 +1,29 @@
+version: '3.5'
+services:
+  worker:
+    build:
+      context: .
+      dockerfile: ./docker/worker/Dockerfile
+    command: ["npm", "--prefix", "packages/worker", "run", "prod"]
+    env_file:
+      - .production.env
+    ports:
+      - 5000:5000
+  user:
+    build:
+      context: .
+      dockerfile: ./docker/user/Dockerfile
+    command: ["npm", "--prefix", "packages/user", "run", "prod"]
+    env_file:
+      - .production.env
+    ports:
+      - 4000:4000
+  cassandra-web:
+    build:
+      context: .
+      dockerfile: ./docker/cassandra-web/Dockerfile
+    command: ["npm", "--prefix", "packages/cassandra-web", "run", "prod"]
+    env_file:
+      - .production.env
+    ports:
+      - 2000:2000
