@@ -177,9 +177,9 @@ worker[Worker]
 kafka[Kafka broker]
 client[Client]
 createUser([Sending batch with user info])
-    client -->|Create user request| user
-    user -->createUser --> kafka;
-    kafka <--> worker;
-    worker --> db;
+    client -->|Create user request| user;
+    user --> createUser --> kafka;
+    kafka ---|Consumer subscribe| worker;
+    worker -->|Writing new user to DB| db;
 ```
 
