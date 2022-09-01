@@ -13,8 +13,8 @@
 - [Usage](#usage)
 - [Project Structure](#project-structure)
   - [user](#user-package-structure)
-- 
-- [Contributing](#contributing)
+- [Containers dependencies](#containers-dependencies)  
+- [Create user flow](#creae-user-flow)
 
 ## Introduction
 
@@ -60,8 +60,8 @@ Go to root project: `cd glassbox-ms`
 
 ### Running project
 
-* `docker-compose up` for deploy application in production mode
-* `docker-compose -if docker-compose.yml -f docker-compose.dev.yml up` for deploy application in development mode which supports hor reload
+* `docker-compose up` for deploy application in production mode.
+* `docker-compose -if docker-compose.yml -f docker-compose.dev.yml up` for deploy application in development mode which supports hot reload.
 
 That's it 🚀
 
@@ -72,7 +72,7 @@ You can also open api documentation on `/docs`.
 
 ## Project Structure
 
-Each package under the `packages` folder.
+_Note: Each package under the `packages` folder._
 
 ```
 glassbox-ms
@@ -119,12 +119,12 @@ glassbox-ms
 ```
 user/
 │   └── src/
-│   │   └── authetication/      /authentication configuration
+│   │   └── authetication/
 │   │   └── controllers/
 │   │   └── schemas/            /all schemas and types we need for the packege 
 │   │   └── services/           /some business logic
 │   │   └── index.ts            /entry file which runs application
-│   │   └── app.ts              /app configuration with all services reqistrations
+│   │   └── app.ts              /app configuration with all services registrations
 │   │   └── swagger.ts      
 │   │   ├── db-connection.ts
 │   └── tests/
@@ -136,10 +136,38 @@ user/
 │
 ```
 
-## Create use flow
+## Containers dependencies
+
+```mermaid
+flowchart TB
+postgres[(PostgresDB)]
+cassandra[(Cassandra)]
+user[User]
+worker[Worker]
+base
+cassandra-web[Cassandra-Web]
+kafka[Kafka broker]
+    base --->|Package dependancy| cassandra-web & user & worker;
+    user & worker ---> postgres;
+    cassandra-web ---> cassandra;
+    worker --->|Consumer subscribe| kafka;
+    user --->|Producer connection| kafka;
+```
+
+## Create user flow
 
 **Flow diagram which interprets data flow on create user request and Kafka usage**
 
+```POST 0.0.0.0/4000/users```
+
+Body example
+
+```
+  {
+    "username": "user",
+    "password": "User123!"
+  }
+```
 
 ```mermaid 
 flowchart TB
@@ -153,5 +181,5 @@ createUser([Sending batch with user info])
     user -->createUser --> kafka;
     kafka <--> worker;
     worker --> db;
-    
 ```
+
