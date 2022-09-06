@@ -1,26 +1,25 @@
 # Glassbox nodejs starter
 
-![GitHub issues](https://img.shields.io/github/issues/VladislavTsygankov/glassbox-ms)
-![GitHub forks](https://img.shields.io/github/forks/VladislavTsygankov/glassbox-ms)
-![GitHub stars](https://img.shields.io/github/stars/VladislavTsygankov/glassbox-ms?style=social)
-![GitHub license](https://img.shields.io/github/license/VladislavTsygankov/glassbox-ms?style-social)
 
 # Table of Contents
 
-- [Introduction](#introduction)
-- [Techstack](#techstack)
-- [Install](#install)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-  - [user](#user-package-structure)
-- [Containers dependencies](#containers-dependencies)  
-- [Create user flow](#creae-user-flow)
+- [Glassbox nodejs starter](#glassbox-nodejs-starter)
+- [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Techstack](#techstack)
+  - [Install](#install)
+  - [Usage](#usage)
+    - [Running project](#running-project)
+  - [Project Structure](#project-structure)
+    - [`user package` structure](#user-package-structure)
+  - [Containers dependencies](#containers-dependencies)
+  - [Create user flow](#create-user-flow)
 
 ## Introduction
 
 **The simple project shows how to setup monorepo by Typescript + Docker + Lerna + Fastify**
 
-The project has 4 packages (inside [packages directory](https://github.com/VladislavTsygankov/glassbox-ms/tree/master/packages))
+The project has 4 packages (inside [packages directory](https://github.com/nSoft-team/glassbox-nodejs-starter/tree/master/packages))
 
 - user (http server) - Has connection to Postgres. Connects to Kafka as a producer. Has tests.
 - cassandra (http server) - Has connection to Cassandra DB.

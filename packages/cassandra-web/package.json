@@ -2,8 +2,8 @@
   "name": "cassandra",
   "version": "1.0.0",
   "description": "> TODO: description",
-  "author": "Vlad Tsygankov <tsygan-97@mail.ru>",
-  "homepage": "https://github.com/VladislavTsygankov/glassbox-ms#readme",
+  "author": "nSoft <tsygan-97@mail.ru>",
+  "homepage": "https://github.com/nSoft-team/glassbox-nodejs-starter#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "directories": {
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VladislavTsygankov/glassbox-ms.git"
+    "url": "git+https://github.com/nSoft-team/glassbox-nodejs-starter.git"
   },
   "scripts": {
     "test": "node ./__tests__/cassandra.test.js",
@@ -24,7 +24,7 @@
     "prod": "tsc && node dist/index.js"
   },
   "bugs": {
-    "url": "https://github.com/VladislavTsygankov/glassbox-ms/issues"
+    "url": "https://github.com/nSoft-team/glassbox-nodejs-starter/issues"
   },
   "dependencies": {
     "@fastify/type-provider-typebox": "^2.3.0",

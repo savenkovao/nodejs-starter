@@ -2,8 +2,8 @@
   "name": "base",
   "version": "1.0.0",
   "description": "> TODO: description",
-  "author": "Vlad Tsygankov",
-  "homepage": "https://github.com/VladislavTsygankov/glassbox-ms#readme",
+  "author": "nSoft",
+  "homepage": "https://github.com/nSoft-team/glassbox-nodejs-starter#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "directories": {
@@ -15,14 +15,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VladislavTsygankov/glassbox-ms.git"
+    "url": "git+https://github.com/nSoft-team/glassbox-nodejs-starter.git"
   },
   "scripts": {
     "prod": "node dist/index.js",
     "dev": "nodemon src/index.ts"
   },
   "bugs": {
-    "url": "https://github.com/VladislavTsygankov/glassbox-ms/issues"
+    "url": "https://github.com/nSoft-team/glassbox-nodejs-starter/issues"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
