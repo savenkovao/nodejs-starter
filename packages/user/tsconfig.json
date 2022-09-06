@@ -2,15 +2,15 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",                           
-    "outDir": "./dist",                              
-    "rootDir": "./src",                            
-    "strict": true,                                
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,                           
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false,
+    "strictPropertyInitialization": false
   },
   "exclude": ["./vitest.config.ts", "./tests", "/node_modules"]
 }

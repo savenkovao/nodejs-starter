@@ -11,13 +11,16 @@
     "build:cassandra-web": "tsc -b packages/cassandra-web",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:user": "vitest",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "format:all": "prettier --write '**/*.{ts,js,json}'",
+    "check:all": "prettier --check '**/*.{ts,js,json}'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "lerna": "^5.4.3",
+    "prettier": "^2.7.1",
     "vitest": "^0.22.1"
   },
   "dependencies": {

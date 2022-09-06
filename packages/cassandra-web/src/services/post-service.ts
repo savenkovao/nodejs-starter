@@ -2,26 +2,30 @@ import { v4 as uuid } from "uuid";
 import mapper from "../db/mapper";
 import { PostCreateType } from "../schemas";
 
-const postMapper = mapper.forModel('Post');
+const postMapper = mapper.forModel("Post");
 
 const createPost = async (post: PostCreateType) => {
-    await postMapper.insert({id: uuid(), title: post.title, description: post.description});
+  await postMapper.insert({
+    id: uuid(),
+    title: post.title,
+    description: post.description,
+  });
 };
 
 const getAllPosts = async () => {
-    const res = await postMapper.findAll();
+  const res = await postMapper.findAll();
 
-    return res.toArray();
+  return res.toArray();
 };
 
 const getPostById = async (id: string) => {
-    const res = await postMapper.find({id})
+  const res = await postMapper.find({ id });
 
-    return res.first();
+  return res.first();
 };
 
 export default {
-    createPost,
-    getAllPosts,
-    getPostById
-}
+  createPost,
+  getAllPosts,
+  getPostById,
+};

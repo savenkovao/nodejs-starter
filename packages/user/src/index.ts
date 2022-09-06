@@ -15,15 +15,15 @@ const start = async () => {
 
     server.log.info("Successful db connection");
 
-    await server.ready()
+    await server.ready();
     server.swagger();
 
-    await server.listen({port: PORT, host: "0.0.0.0"});
-    
+    await server.listen({ port: PORT, host: "0.0.0.0" });
+
     server.log.info(`Server running on port = ${PORT}`);
-  } catch(e) {
+  } catch (e) {
     server.log.error(e);
-    process.exit(1);     
+    process.exit(1);
   }
 };
 
