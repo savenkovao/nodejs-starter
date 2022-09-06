@@ -44,11 +44,11 @@ _Note: Each package has its own tsconfig and build commands._
 ## Install
 
 ```sh
-lerna bootsrap
+lerna bootstrap
 ``` 
 or 
 ```sh
-npx lerna bootsrap
+npx lerna bootstrap
 ``` 
 
 That's it 🚀
@@ -60,7 +60,7 @@ Go to root project: `cd glassbox-ms`
 ### Running project
 
 * `docker-compose up` for deploy application in production mode.
-* `docker-compose -if docker-compose.yml -f docker-compose.dev.yml up` for deploy application in development mode which supports hot reload.
+* `docker-compose -i docker-compose.yml -f docker-compose.dev.yml up` for deploy application in development mode which supports hot reload.
 
 That's it 🚀
 
@@ -146,7 +146,7 @@ worker[Worker]
 base
 cassandra-web[Cassandra-Web]
 kafka[Kafka broker]
-    base --->|Package dependancy| cassandra-web & user & worker;
+    base --->|Package dependency| cassandra-web & user & worker;
     user & worker ---> postgres;
     cassandra-web ---> cassandra;
     worker --->|Consumer subscribe| kafka;
