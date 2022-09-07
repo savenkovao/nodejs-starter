@@ -60,7 +60,7 @@ Go to root project: `cd glassbox-ms`
 ### Running project
 
 * `docker-compose up` for deploy application in production mode.
-* `docker-compose -i docker-compose.yml -f docker-compose.dev.yml up` for deploy application in development mode which supports hot reload.
+* `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up` for deploy application in development mode which supports hot reload.
 
 That's it 🚀
 
