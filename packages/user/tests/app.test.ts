@@ -134,7 +134,7 @@ describe("User controller", () => {
     expect(spy).toHaveBeenCalledOnce();
     expect(spy).toHaveBeenCalledWith(createObj);
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toEqual("Kafka message sent");
+    expect(res.body).toEqual(JSON.stringify({message: "Kafka message sent"}));
   });
 
   it("error handling POST /users", async () => {
@@ -152,7 +152,7 @@ describe("User controller", () => {
     expect(spy).toHaveBeenCalledWith(createObj);
 
     expect(res.statusCode).toEqual(500);
-    expect(JSON.parse(res.body).msg).toEqual("Server error");
+    expect(res.body).toEqual(JSON.stringify({message: "Server error"}));
   });
 
   it("get users with empty token GET /users", async () => {
