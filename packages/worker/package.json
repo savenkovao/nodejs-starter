@@ -8,8 +8,7 @@
     "build": "tsc",
     "dev": "nodemon -e ts -w 'src/**/*.ts' -w '../base/src/**/*' -x npm run dev:serve",
     "dev:serve": "tsc -b ../base && ts-node src/index.ts",
-    "prod:base": "tsc -b ../base",
-    "prod": "npm run prod:base && tsc && node dist/index.js"
+    "prod": "tsc && node dist/index.js"
   },
   "keywords": [],
   "author": "",

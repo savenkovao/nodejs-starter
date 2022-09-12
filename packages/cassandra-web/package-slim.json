@@ -1,0 +1,20 @@
+{
+    "name": "cassandra",
+    "version": "1.0.0",
+    "dependencies": {
+        "@fastify/type-provider-typebox": "^2.3.0",
+        "@sinclair/typebox": "^0.24.31",
+        "base": "^1.0.0",
+        "cassandra-driver": "^4.6.4",
+        "fastify": "^4.5.3",
+        "fastify-plugin": "^4.2.1",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "@types/node": "^18.7.14",
+        "@types/uuid": "^8.3.4",
+        "nodemon": "^2.0.19",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.8.2"
+    }
+}

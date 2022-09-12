@@ -9,10 +9,6 @@ const server = fastify({ logger: Logger });
 
 const start = async () => {
   try {
-    await startConsumer(["user_service"]);
-
-    server.log.info("Kafka consumer is running");
-
     await sequelize.authenticate();
     server.log.info("DB authenticated");
 
@@ -21,6 +17,10 @@ const start = async () => {
     await server.listen({ port: PORT, host: "0.0.0.0" });
 
     server.log.info(`Server running on port = ${PORT}`);
+
+    await startConsumer(["user_service"]);
+
+    server.log.info("Kafka consumer  is running");
   } catch (e) {
     server.log.error(e);
     process.exit(1);

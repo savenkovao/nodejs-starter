@@ -19,7 +19,8 @@
   },
   "scripts": {
     "prod": "node dist/index.js",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "build": "tsc"
   },
   "bugs": {
     "url": "https://github.com/nSoft-team/glassbox-nodejs-starter/issues"

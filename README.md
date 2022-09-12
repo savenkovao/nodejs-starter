@@ -45,29 +45,35 @@ _Note: Each package has its own tsconfig and build commands._
 
 ```sh
 lerna bootstrap
+lerna run build
 ``` 
 or 
 ```sh
 npx lerna bootstrap
+npx lerna run build
 ``` 
 
 That's it 🚀
 
 ## Usage
 
-Go to root project: `cd glassbox-ms`
+Go to root project: `cd glassbox-nodejs-starter`
 
 ### Running project
 
-* `docker-compose up` for deploy application in production mode.
-* `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up` for deploy application in development mode which supports hot reload.
+* `docker-compose up --build` for deploy application in production mode.
+* `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build` for deploy application in development mode which supports hot reload.
+
+_Note: If you switch between prod and dev - use prefix `--build`._
 
 That's it 🚀
 
-After run `docker-compose up`, you will see `user` container runs on `4000` port. `cassandra-web` container runs on `2000` port.
+After run `docker-compose up`, you will see `user` container runs on `4000` port. `cassandra-web` container runs on `1000` port.
 You can also open api documentation on `/docs`.
 
 (you can also check the api by make a request to `GET 0.0.0.0:4000`)
+
+_Note: For the first use do docker-compose build._
 
 ## Project Structure
 

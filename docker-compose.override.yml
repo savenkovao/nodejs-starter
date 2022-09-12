@@ -4,7 +4,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/worker/Dockerfile
-    command: ["npm", "--prefix", "packages/worker", "run", "prod"]
     env_file:
       - .production.env
     ports:
@@ -13,7 +12,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/user/Dockerfile
-    command: ["npm", "--prefix", "packages/user", "run", "prod"]
     env_file:
       - .production.env
     ports:
@@ -22,8 +20,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/cassandra-web/Dockerfile
-    command: ["npm", "--prefix", "packages/cassandra-web", "run", "prod"]
     env_file:
       - .production.env
     ports:
-      - 2000:2000
+      - 1000:1000

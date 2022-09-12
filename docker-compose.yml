@@ -59,7 +59,7 @@ services:
     volumes:
       - ./packages/user:/glassbox-ms/packages/user
       - ./packages/base:/glassbox-ms/packages/base
-      - usernodemodules:/packages/cassandra-web/node_modules
+      - usernodemodules:/packages/user/node_modules
       - basenodemodules:/packages/base/node_modules
 
   worker:
@@ -71,7 +71,7 @@ services:
     volumes:
       - ./packages/worker:/glassbox-ms/packages/worker
       - ./packages/base:/glassbox-ms/packages/base
-      - workernodemodules:/packages/cassandra-web/node_modules
+      - workernodemodules:/packages/worker/node_modules
       - basenodemodules:/packages/base/node_modules
 
 
@@ -81,6 +81,7 @@ services:
       - .env
     depends_on:
       - cassandra
+    restart: always
     volumes:
       - ./packages/cassandra-web:/glassbox-ms/packages/cassandra-web
       - ./packages/base:/glassbox-ms/packages/base

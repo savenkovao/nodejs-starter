@@ -5,21 +5,19 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build:base": "tsc -b packages/base",
-    "build:user": "tsc -b packages/user",
-    "build:worker": "tsc -b packages/worker",
-    "build:cassandra-web": "tsc -b packages/cassandra-web",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:user": "vitest",
     "build": "lerna run build",
     "format:all": "prettier --write '**/*.{ts,js,json}'",
-    "check:all": "prettier --check '**/*.{ts,js,json}'"
+    "check:all": "prettier --check '**/*.{ts,js,json}'",
+    "lerna-dockerize": "lerna-dockerize"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "lerna": "^5.4.3",
+    "lerna-dockerize": "^1.0.3",
     "prettier": "^2.7.1",
     "vitest": "^0.22.1"
   },
