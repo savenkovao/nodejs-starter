@@ -26,4 +26,4 @@ services:
     env_file:
       - .development.env
     ports:
-      - 2001:2001
+      - 1001:1001

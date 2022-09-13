@@ -21,7 +21,9 @@ COPY --from=base-build /app/packages/base/package.json /app/packages/base/
 RUN npx lerna bootstrap --scope cassandra --includeDependencies
 COPY --from=base-build /app/packages/base/ /app/packages/base/
 WORKDIR /app/packages/cassandra-web
-COPY  packages/cassandra-web ./
+COPY  packages/cassandra-web/package.json ./
+COPY  packages/cassandra-web/src ./src
+COPY  packages/cassandra-web/tsconfig.json ./
 RUN npm run build
 
 FROM base
