@@ -9,7 +9,7 @@ import {
 import bcrypt from "bcryptjs";
 import { UserCreate } from "../interfaces/user.create";
 
-@Table({ tableName: "users" })
+@Table({ tableName: "users", timestamps: false })
 export class User extends Model<User, UserCreate> {
   @Column({
     type: DataType.INTEGER,
