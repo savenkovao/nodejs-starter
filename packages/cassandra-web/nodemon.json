@@ -1,0 +1,5 @@
+{
+    "watch": ["src", "../base/src"],
+    "ext": "ts",
+    "exec": "tsc -b ../base && ts-node src/index.ts"
+}

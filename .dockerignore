@@ -1,0 +1,4 @@
+./packages/cassandra-web/node_modules
+./packages/base/node_modules
+./packages/user/node_modules
+./packages/worker/node_modules

@@ -59,8 +59,8 @@ services:
     volumes:
       - ./packages/user:/glassbox-ms/packages/user
       - ./packages/base:/glassbox-ms/packages/base
-      - usernodemodules:/packages/user/node_modules
-      - basenodemodules:/packages/base/node_modules
+      - usernodemodules:/glassbox-ms/packages/user/node_modules
+      - basenodemodules:/glassbox-ms/packages/base/node_modules
 
   worker:
     container_name: worker
@@ -71,8 +71,8 @@ services:
     volumes:
       - ./packages/worker:/glassbox-ms/packages/worker
       - ./packages/base:/glassbox-ms/packages/base
-      - workernodemodules:/packages/worker/node_modules
-      - basenodemodules:/packages/base/node_modules
+      - workernodemodules:/glassbox-ms/packages/worker/node_modules
+      - basenodemodules:/glassbox-ms/packages/base/node_modules
 
 
   cassandra-web:
@@ -85,8 +85,8 @@ services:
     volumes:
       - ./packages/cassandra-web:/glassbox-ms/packages/cassandra-web
       - ./packages/base:/glassbox-ms/packages/base
-      - cassandrawebnodemodules:/packages/cassandra-web/node_modules
-      - basenodemodules:/packages/base/node_modules
+      - cassandrawebnodemodules:/glassbox-ms/packages/cassandra-web/node_modules
+      - basenodemodules:/glassbox-ms/packages/base/node_modules
   
   postgres:
     container_name: postgres-starter-project
