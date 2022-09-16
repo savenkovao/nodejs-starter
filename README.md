@@ -7,8 +7,8 @@
 - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Techstack](#techstack)
-  - [Install](#install)
   - [Usage](#usage)
+  - [Install](#install)
     - [Running project](#running-project)
   - [Project Structure](#project-structure)
     - [`user package` structure](#user-package-structure)
@@ -41,6 +41,10 @@ _Note: Each package has its own tsconfig and build commands._
 - [Sequelize](https://sequelize.org/) - ORM for working with SQL databases 
 - [Swagger](https://github.com/fastify/fastify-swagger) - A Fastify plugin for serving a Swagger UI
 
+## Usage
+
+Go to root project: `cd glassbox-nodejs-starter`
+
 ## Install
 
 ```sh
@@ -54,10 +58,6 @@ npx lerna run build
 ``` 
 
 That's it 🚀
-
-## Usage
-
-Go to root project: `cd glassbox-nodejs-starter`
 
 ### Running project
 
@@ -73,7 +73,30 @@ You can also open api documentation on `/docs`.
 
 (you can also check the api by make a request to `GET 0.0.0.0:4000`)
 
-_Note: For the first use do docker-compose build._
+### First login
+
+**To get access for users routes you need to get bearer token**
+
+You can login with credentials 
+
+```
+{
+  "username": "admin",
+  "password": "admin"
+}
+```
+
+Response: 
+
+```
+{
+    "token": "eyJhbGciOiJIUzI1NiJ9.MQ.fGaUARI99DDadCuNm4ZUhaB6Bpx8KiJsnCLTisJ0bp4",
+    "message": "Login successfully"
+}
+```
+Use the token for Bearer authentication
+
+That's it 🚀
 
 ## Project Structure
 

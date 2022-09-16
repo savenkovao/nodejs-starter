@@ -21,10 +21,7 @@ COPY --from=base-build /app/packages/base/package.json /app/packages/base/
 RUN npx lerna bootstrap --scope=user --includeDependencies
 COPY --from=base-build /app/packages/base/ /app/packages/base/
 WORKDIR /app/packages/user
-COPY  packages/user/package.json ./
-COPY  packages/user/src ./src
-COPY  packages/user/tsconfig.json ./
-COPY  packages/user/secret-key ./
+COPY  packages/user ./
 RUN npm run build
 
 FROM base
