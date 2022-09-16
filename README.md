@@ -10,6 +10,7 @@
   - [Usage](#usage)
   - [Install](#install)
     - [Running project](#running-project)
+    - [First login](#first-login)
   - [Project Structure](#project-structure)
     - [`user package` structure](#user-package-structure)
   - [Containers dependencies](#containers-dependencies)
@@ -64,7 +65,9 @@ That's it 🚀
 * `docker-compose up --build` for deploy application in production mode.
 * `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build` for deploy application in development mode which supports hot reload.
 
-_Note: If you switch between prod and dev - use prefix `--build`._
+_Notes:_
+- If you switch between prod and dev - use prefix `--build`.
+- Dev env is running on port `4001`
 
 That's it 🚀
 
@@ -72,6 +75,7 @@ After run `docker-compose up`, you will see `user` container runs on `4000` port
 You can also open api documentation on `/docs`.
 
 (you can also check the api by make a request to `GET 0.0.0.0:4000`)
+
 
 ### First login
 

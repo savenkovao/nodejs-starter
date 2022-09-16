@@ -1,10 +1,9 @@
-version: '3.5'
+version: "3.5"
 services:
   cassandra:
     container_name: cassandra
     image: cassandra:4.0
     ports:
-      - 7000:7000
       - 7001:7001
       - 7199:7199
       - 9042:9042
@@ -74,7 +73,6 @@ services:
       - workernodemodules:/glassbox-ms/packages/worker/node_modules
       - basenodemodules:/glassbox-ms/packages/base/node_modules
 
-
   cassandra-web:
     container_name: cassandra-web
     env_file:
@@ -87,7 +85,7 @@ services:
       - ./packages/base:/glassbox-ms/packages/base
       - cassandrawebnodemodules:/glassbox-ms/packages/cassandra-web/node_modules
       - basenodemodules:/glassbox-ms/packages/base/node_modules
-  
+
   postgres:
     container_name: postgres-starter-project
     image: postgres:12
@@ -112,4 +110,3 @@ volumes:
   basenodemodules:
   workernodemodules:
   cassandrawebnodemodules:
-
